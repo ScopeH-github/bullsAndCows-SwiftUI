@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+let randomNumber: Int = Int.random(in: 0...999999)

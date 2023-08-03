@@ -12,7 +12,7 @@ struct KeyPadTextViewModifier: ViewModifier {
         content
             .monospaced(true)
             .monospacedDigit()
-            .font(.title2)
+            .font(.title)
             .frame(minWidth: 0, maxWidth: 65, minHeight: 0, maxHeight: 70)
     }
 }
@@ -34,13 +34,54 @@ extension View {
     }
 }
 
-struct KeyPadView: View {
+struct NumberButtonView: View {
+    @State var text: String
+    @State var action: ()
     var body: some View {
-        Button (action: {}) {
-            Image(systemName: "clear.fill")
+        Button(action: {action}) {
+            Text(text)
                 .keypadLabelViewStyle()
         }
         .keypadButtonViewStyle()
+    }
+}
+
+struct ActionButtonView: View {
+    @State var symbolName: String
+    @State var action: ()
+    var body: some View {
+        Button(action: {action}) {
+            Image(systemName: symbolName)
+                .keypadLabelViewStyle()
+        }
+        .keypadButtonViewStyle()
+    }
+}
+
+struct KeyPadView: View {
+    var body: some View {
+        Grid {
+            GridRow {
+                NumberButtonView(text: "1")
+                NumberButtonView(text: "2")
+                NumberButtonView(text: "3")
+            }
+            GridRow {
+                NumberButtonView(text: "4")
+                NumberButtonView(text: "5")
+                NumberButtonView(text: "6")
+            }
+            GridRow {
+                NumberButtonView(text: "7")
+                NumberButtonView(text: "8")
+                NumberButtonView(text: "9")
+            }
+            GridRow {
+                ActionButtonView(symbolName: "clear")
+                NumberButtonView(text: "0")
+                ActionButtonView(symbolName: "checkmark.square")
+            }
+        }
     }
 }
 
