@@ -11,7 +11,7 @@ import SwiftUI
 struct bullsAndCows_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(password: "123456")
         }
     }
 }
